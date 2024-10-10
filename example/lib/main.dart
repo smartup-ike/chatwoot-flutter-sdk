@@ -26,7 +26,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({
+    super.key,
+    required this.title,
+  });
 
   final String title;
 
@@ -47,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text("Chatwoot Example"),
       ),
       body: ChatwootWidget(
-        websiteToken: "websiteToken",
+        websiteToken: "BjJbHKgBdMxpC41UPigyTN5X",
         baseUrl: "https://app.chatwoot.com",
         user: ChatwootUser(
           identifier: "test@test.com",
@@ -88,6 +91,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     final imageData = await photo.readAsBytes();
     final decodedImage = image.decodeImage(imageData);
+    if (decodedImage == null) {
+      return [];
+    }
     final scaledImage = image.copyResize(decodedImage, width: 500);
     final jpg = image.encodeJpg(scaledImage, quality: 90);
 
